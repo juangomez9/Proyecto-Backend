@@ -22,10 +22,11 @@ app.get("/products/:pid", async (req, res) => {
     let product = await productManager.getProductById(id);
     res.send(product);
   } catch (err) {
-    res.send(err);
+    res.status(404).send({ error: `No se encontró ningún producto con el ID ${req.params.pid}` });
   }
 });
 
-app.listen("8080", () => {
-  console.log("Escuchando el puerto 8080");
+const port = 8080
+app.listen(port, () => {
+  console.log(`Escuchando el puerto ${port}`);
 });
