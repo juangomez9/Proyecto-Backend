@@ -9,17 +9,6 @@ export default class ProductManager {
   }
 
   async addProduct(product) {
-    if (
-      (!product.title ||
-        !product.description ||
-        !product.price ||
-        !product.thumbnail ||
-        "",
-      !product.code || !product.stock)
-    ) {
-      console.log("Faltan campos obligatorios");
-      return;
-    }
     try {
       const products = await this.getProducts();
       const id = await this.getId(products);
@@ -27,7 +16,7 @@ export default class ProductManager {
       products.push(product);
       await fs.promises.writeFile(this.path, JSON.stringify(products));
     } catch (err) {
-      console.log("No se pudo agregar el producto.");
+      throw new Error("Error al agregar el producto");
     }
   }
 
@@ -40,20 +29,17 @@ export default class ProductManager {
         return JSON.parse(products);
       }
     } catch (err) {
-      console.log("No puedo mostrar los productos");
+      throw new Error("No puedo mostrar los productos");
     }
   }
 
   async getProductById(id) {
     try {
       const products = await this.getProducts();
-      let product = products.find((prod) => prod.id == id);
-      if (!product) {
-        throw new Error();
-      }
-      return product;
+      let product = products.find((prod) => prod.id === id);
+      return product || null;
     } catch (err) {
-      throw err;
+      throw new Error("Error al buscar el producto por ID");
     }
   }
 
@@ -66,15 +52,14 @@ export default class ProductManager {
       const products = await this.getProducts();
       const productIndex = products.findIndex((prod) => prod.id === id);
       if (productIndex === -1) {
-        return false;
+        throw new Error("No se encontró el producto");
       }
       const updatedProduct = { ...products[productIndex], ...patchProduct };
-      products.splice(productIndex, 1, updatedProduct);
+      products[productIndex] = updatedProduct;
       await fs.promises.writeFile(this.path, JSON.stringify(products));
-      return true;
+      return updatedProduct;
     } catch (err) {
-      console.log("No se pudo actualizar el producto");
-      return false;
+      throw new Error("Error al actualizar el producto");
     }
   }
 
@@ -83,14 +68,13 @@ export default class ProductManager {
       const products = await this.getProducts();
       const productIndex = products.findIndex((prod) => prod.id === id);
       if (productIndex === -1) {
-        return false;
+        throw new Error("No se encontró el producto");
       }
-      products.splice(productIndex, 1);
+      let deletedProduct = products.splice(productIndex, 1)[0];
       await fs.promises.writeFile(this.path, JSON.stringify(products));
-      return true;
+      return deletedProduct;
     } catch (err) {
-      console.log("No se pudo eliminar el producto");
-      return false;
+      throw new Error(err.message);
     }
   }
 }
