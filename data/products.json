@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Coca Cola",
+        "description": "Gaseosa de 2 litros",
+        "price": "600",
+        "thumbnails": "./img/monster.jpg",
+        "code": "22",
+        "stock": "50",
+        "category": "bebidas",
+        "id": 0
+    },
+    {
+        "title": "Auriculares",
+        "description": "Hyper X",
+        "price": "22600",
+        "thumbnails": "./img/monster.jpg",
+        "code": "222",
+        "stock": "502",
+        "category": "computacion",
+        "id": 1
+    },
+    {
+        "title": "Mouse",
+        "description": "BenQ",
+        "price": "222600",
+        "thumbnails": "./img/monster.jpg",
+        "code": "2233",
+        "stock": "504",
+        "category": "computacion",
+        "id": 2
+    },
+    {
+        "title": "Monitor 144hz",
+        "description": "1ms",
+        "price": "24400",
+        "thumbnails": "./img/monster.jpg",
+        "code": "221",
+        "stock": "5",
+        "category": "computacion",
+        "id": 3
+    },
+    {
+        "title": "Parlantes",
+        "price": "200",
+        "description": "zowie",
+        "stock": "2",
+        "code": "222",
+        "category": "computacion",
+        "thumbnails": "./img/monster.jpg",
+        "id": 4
+    }
+]

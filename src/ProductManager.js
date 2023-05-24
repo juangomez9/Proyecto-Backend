@@ -66,109 +66,17 @@ export default class ProductManager {
   async deleteProduct(id) {
     try {
       const products = await this.getProducts();
-      const productIndex = products.findIndex((prod) => prod.id === id);
+      const productIndex = products.findIndex(
+        (prod) => prod.id === parseInt(id)
+      );
       if (productIndex === -1) {
         throw new Error("No se encontró el producto");
       }
-      let deletedProduct = products.splice(productIndex, 1)[0];
+      const deletedProduct = products.splice(productIndex, 1)[0];
       await fs.promises.writeFile(this.path, JSON.stringify(products));
       return deletedProduct;
     } catch (err) {
-      throw new Error(err.message);
+      throw new Error("Error al eliminar el producto");
     }
   }
-}
-
-if (!fs.existsSync("./data/products.json")) {
-  const products = new ProductManager("./data/products.json");
-  const test = async () => {
-    try {
-      await products.addProduct({
-        title: "Coca Cola",
-        description: "Gaseosa de 2 litros",
-        price: 600,
-        thumbnail: "",
-        code: 22,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Spite",
-        description: "Gaseosa de 3 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Pritty",
-        description: "Gaseosa de 3 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Fernet",
-        description: "Gaseosa de 3 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Jugo",
-        description: "Jugo de 3 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Fanta",
-        description: "Gaseosa de 3 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Agua",
-        description: "Agua de 2 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Levite",
-        description: "Agua saborizada de 2 litros",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Monster",
-        description: "Energizante de 1 litro",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      await products.addProduct({
-        title: "Red bull",
-        description: "Energizante de 1 litro",
-        price: 800,
-        thumbnail: "",
-        code: 21,
-        stock: 50,
-      });
-      const allProducts = await products.getProducts();
-      console.log(allProducts);
-    } catch (err) {
-      console.log("Algo salio mal");
-    }
-  };
-
-  test();
 }

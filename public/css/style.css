@@ -1,0 +1,38 @@
+#productForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+  }
+  
+  #productForm label {
+    margin-bottom: 10px;
+  }
+  
+  #productForm input,
+  #productForm button {
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #productForm button {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }

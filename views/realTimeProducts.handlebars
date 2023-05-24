@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/css/style.css">
+
+<h1 style="text-align: center; margin-bottom: 5%;">Lista de Productos</h1>
+
+<div class="container">
+
+<table style="margin-right: 5%;" >
+  <thead>
+    <tr>
+      <th style="width: 150px">Nombre</th>
+      <th style="width: 200px">Descripción</th>
+      <th style="width: 80px">Precio</th>
+      <th style="width: 60px">Código</th>
+      <th style="width: 60px">Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each prod}}
+    <tr>
+      <td style="text-align: center">{{this.title}}</td>
+      <td style="text-align: center">{{this.description}}</td>
+      <td style="text-align: center">${{this.price}}</td>
+      <td style="text-align: center">{{this.code}}</td>
+      <td style="text-align: center">{{this.stock}}</td>
+      <td style="text-align: center"><button class="delete-button" onclick="deleteProduct('{{this.id}}')">Eliminar</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<form id="productForm" onsubmit="sendNewProduct()" style="display: flex, flexDirection: column">
+  <label for="name">Nombre:</label>
+  <input type="text" id="title" name="title" required>
+  
+  <label for="price">Precio:</label>
+  <input type="number" id="price" name="price" required>
+
+  <label for="category">Categoria:</label>
+  <input type="text" id="category" name="category" required>
+  
+  <label for="description">Descripción:</label>
+  <input type="text" id="description" name="description" required>
+  
+  <label for="stock">Stock:</label>
+  <input type="number" id="stock" name="stock" required>
+  
+  <label for="code">Código:</label>
+  <input type="text" id="code" name="code" required>
+  
+  <label for="image">Imagen:</label>
+  <input type="file" id="image" name="image">
+  
+  <button type="submit" id="submitButton">Agregar</button>
+</form>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
